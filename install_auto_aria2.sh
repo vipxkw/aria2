@@ -101,9 +101,9 @@ download_aria2(){
 #下载aria2 配置文件
 download_aria2_conf(){
      mkdir "${file}" && cd "${file}"
-	 wget --no-check-certificate -N "https://67zz.cn/shell/aria2.conf"
+	 wget --no-check-certificate -N "https://raw.githubusercontent.com/vipxkw/aria2/master/shell/aria2.conf"
 	 [[ ! -s "aria2.conf" ]] && echo -e "${Error} Aria2 配置文件下载失败 !" && rm -rf "${file}" && exit 1
-	 wget --no-check-certificate -N "https://67zz.cn/Aria2/dht.dat"
+	 wget --no-check-certificate -N "https://raw.githubusercontent.com/vipxkw/aria2/master/shell/dht.dat"
 	 [[ ! -s "dht.dat" ]] && echo -e "${Error} Aria2 DHT文件下载失败 !" && rm -rf "${file}" && exit 1
 	 echo '' > aria2.session
 	 stty erase '^H' && read -p "请输入aria2密钥:" pass
@@ -114,14 +114,14 @@ download_aria2_conf(){
 #下载服务脚本
 service_aria2(){
      if [[ ${release} = "centos" ]]; then
-		if ! wget --no-check-certificate https://67zz.cn/shell/aria2_centos -O /etc/init.d/aria2; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/vipxkw/aria2/master/shell/aria2_centos -O /etc/init.d/aria2; then
 			echo -e "${Error} aria2服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
 		chkconfig --add aria2
 		chkconfig aria2 on
 	 else
-		if ! wget --no-check-certificate https://67zz.cn/shell/aria2_debian -O /etc/init.d/aria2; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/vipxkw/aria2/master/shell/aria2_debian -O /etc/init.d/aria2; then
 			echo -e "${Error} aria2服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
@@ -347,14 +347,14 @@ install_autoUpload(){
 	 wget --no-check-certificate -q -O json-parser "https://raw.githubusercontent.com/0oVicero0/OneDrive/master/Business/json-parser"
 	 wget --no-check-certificate -q -O onedrive "https://raw.githubusercontent.com/0oVicero0/OneDrive/master/Business/onedrive"
 	 wget --no-check-certificate -q -O onedrive-d "https://raw.githubusercontent.com/0oVicero0/OneDrive/master/Business/onedrive-d"
-	 wget --no-check-certificate -q -O onedrive-authorize "https://67zz.cn/shell/onedrive-authorize"
+	 wget --no-check-certificate -q -O onedrive-authorize "https://raw.githubusercontent.com/vipxkw/aria2/master/shell/onedrive-authorize"
 	 wget --no-check-certificate -q -O onedrive-base "https://raw.githubusercontent.com/0oVicero0/OneDrive/master/Business/onedrive-base"
-	 wget --no-check-certificate -q -O onedrive.cfg "https://67zz.cn/shell/onedrive.cfg"
+	 wget --no-check-certificate -q -O onedrive.cfg "https://raw.githubusercontent.com/vipxkw/aria2/master/shell/onedrive.cfg"
 	 chmod -R a+x ${auto_upload}
 	 ln -sf ${auto_upload}/onedrive /usr/local/bin/
 	 ln -sf ${auto_upload}/onedrive-d /usr/local/bin/
      rm -rf $(basename "$0")
-	 wget -P ${file}  --no-check-certificate -N "https://67zz.cn/shell/autoUpload.sh"
+	 wget -P ${file}  --no-check-certificate -N "https://raw.githubusercontent.com/vipxkw/aria2/master/shell/autoUpload.sh"
 	 sed -i '$a on-download-complete=/root/.aria2/autoUpload.sh' "${aria2_conf}"
 	 chmod 777 ${file}/*
 	 restart_aria2
